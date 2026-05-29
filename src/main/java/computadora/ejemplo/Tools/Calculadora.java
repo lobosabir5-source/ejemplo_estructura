@@ -3,7 +3,7 @@ import java.util.Stack;
 
 public class Calculadora {
 
-    public static int prioridad(char operador) {
+    public static int Ejecutor(char operador) {
 
         switch (operador) {
 
@@ -58,7 +58,7 @@ public class Calculadora {
             else {
 
                 while (!pila.isEmpty() &&
-                        prioridad(c) <= prioridad(pila.peek())) {
+                        Ejecutor(c) <= Ejecutor(pila.peek())) {
 
                     postfix.append(pila.pop());
                 }
@@ -78,7 +78,7 @@ public class Calculadora {
             String postfix
     ) {
 
-        Stack<Double> pila = new Stack<>();
+        Stack<Double> fila = new Stack<>();
 
         for (int i = 0; i < postfix.length(); i++) {
 
@@ -86,39 +86,39 @@ public class Calculadora {
 
             if (Character.isDigit(c)) {
 
-                pila.push((double)(c - '0'));
+                fila.push((double)(c - '0'));
             }
 
             else {
 
-                double b = pila.pop();
-                double a = pila.pop();
+                double b = fila.pop();
+                double a = fila.pop();
 
                 switch (c) {
 
                     case '+':
-                        pila.push(a + b);
+                        fila.push(a + b);
                         break;
 
                     case '-':
-                        pila.push(a - b);
+                        fila.push(a - b);
                         break;
 
                     case '*':
-                        pila.push(a * b);
+                        fila.push(a * b);
                         break;
 
                     case '/':
-                        pila.push(a / b);
+                        fila.push(a / b);
                         break;
 
                     case '^':
-                        pila.push(Math.pow(a, b));
+                        fila.push(Math.pow(a, b));
                         break;
                 }
             }
         }
 
-        return pila.pop();
+        return fila.pop();
     }
 }
